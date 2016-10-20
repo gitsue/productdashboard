@@ -1,0 +1,23 @@
+<% @title="Edit Product #{@curr_product.id}" %>
+
+<h1>Editing Product <%= @curr_product.id %></h1>
+<form action="/products/<%= @curr_product.id %>/update" method="post">
+<input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
+	<label>Name:</label>
+	<input type="text" name="name" value="<%= @curr_product.name %>">
+	<label>Description:</label>
+	<input type="text" name="descr" value="<%= @curr_product.description %>">
+	<label>Price:</label>
+	<input type="number" name="price" value="<%= @curr_product.pricing %>">
+	<label>Category:</label>
+	<select type="text" name="category">
+		<option value="">Pick Category</option>
+		<% @category.each {|category| %>
+		<option value="<%= category.id %>"><%= category.name %></option>
+		<% } %>
+	</select>
+	<input type="submit" value="Update">
+</form>
+
+<a href="/products/<%= @curr_product.id %>">Show</a>
+<a href="/products/">Back</a>

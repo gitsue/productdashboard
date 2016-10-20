@@ -1,0 +1,18 @@
+<% @title="Product #{@curr_product.id} Info" %>
+
+<p>Name: <%= @curr_product.name %></p>
+<p>Description: <%= @curr_product.description %></p>
+<p>Price: $<%= number_with_precision(@curr_product.pricing, :precision => 2) %></p>
+<p>Category: <%= @curr_product.category_name %></p>
+<a href="/products/<%= @curr_product.id %>/edit">Edit</a>
+<a href="/products/">Back</a>
+
+<h4>Comment:</h4>
+<form action="/comments/<%= @curr_product.id %>" method="post">
+<input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
+	<textarea name="comment"></textarea>
+	<input type="submit" value="Submit">
+</form>
+<% @product_comments.each {|comment| %>
+<p><%= comment.comment %></p>
+<% } %>

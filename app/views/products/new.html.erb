@@ -1,0 +1,21 @@
+<% @title="New Product" %>
+
+<h1>New Product</h1>
+<form action="/products/create" method="post">
+<input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
+	<label>Category</label>
+	<select type="text" name="category">
+		<option value="">Pick Category</option>
+		<% @category.each {|category| %>
+		<option value="<%=category.id%>"><%= category.name %></option>
+		<% } %>
+	</select>
+	<label>Name:</label>
+	<input type="text" name="name">
+	<label>Description:</label>
+	<input type="text" name="descr">
+	<label>Price:</label>
+	<input type="number" name="price">
+	<input type="submit" value="Create">
+</form>
+<a href="/products/">Back</a>	

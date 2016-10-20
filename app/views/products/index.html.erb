@@ -1,0 +1,35 @@
+<% @title= "All the Products" %>
+
+<h1>Listing products</h1>
+<a href="/comments/"><button>All Comments</button></a>
+<table>
+	<thead>
+		<tr>
+			<th>Name</th>
+			<th>Description</th>
+			<th>Price</th>
+			<th>Category</th>
+			<th>Action</th>
+		</tr>
+	</thead>
+	<tbody>
+		<% @products.each {|product| %>
+		<tr>
+			<td><%= product.name %></td>
+			<td><%= product.description %></td>
+			<td>$<%= number_with_precision(product.pricing, :precision => 2) %></td>
+			<td><%= product.category_name %></td>
+			<td>
+				<a href="/products/<%= product.id %>/">Show</a>
+				<a href="/products/<%= product.id %>/edit/">Edit</a>
+				<form action="/products/<%= product.id %>/destroy/" method="post">
+					<input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
+					<input type="hidden" name="_method" value="delete">
+					<input type="submit" value="Remove">
+				</form>
+			</td>
+		</tr>
+		<% } %>
+	</tbody>
+</table>
+<a href="/products/new/"><button>New Product</button></a>
